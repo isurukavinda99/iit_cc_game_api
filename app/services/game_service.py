@@ -37,3 +37,8 @@ class GameService:
     def get_games(invoker: str, db: Session = Depends(get_db())):
         games = GameRepository.get_all(db)
         return games
+
+    @staticmethod
+    def get_by_id(invoker: str, game_id: int, db: Session = Depends(get_db())):
+        game = GameRepository.get_by_id(game_id = game_id, db= db)
+        return game

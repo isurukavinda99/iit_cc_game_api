@@ -17,3 +17,7 @@ class GameRepository:
     @staticmethod
     def get_all(db: Session):
         return db.query(GameModal).options(joinedload(GameModal.category)).all()
+
+    @staticmethod
+    def get_by_id(game_id: int, db: Session):
+        return db.query(GameModal).options(joinedload(GameModal.category)).filter(GameModal.id == game_id).first()

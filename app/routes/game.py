@@ -1,6 +1,5 @@
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
-from fastapi import FastAPI, HTTPException
 
 from app.dto.game_schema import GameResponse, GameCreate
 from app.services.game_service import GameService
@@ -18,6 +17,11 @@ async def create_item(item: GameCreate, db: Session = Depends(get_db), claims: d
     return game
 
 @router.get("")
-async def get_all_games(db: Session = Depends(get_db), claims: dict = Depends(require_auth)):
+async def get_all_games( db: Session = Depends(get_db), claims: dict = Depends(require_auth)):
     games = GameService.get_games(invoker=claims.get("email"), db=db)
     return games
+
+@router.get("/{game_id}")
+async def get_by_id(game_id: int, db: Session = Depends(get_db), claims: dict = Depends(require_auth)):
+    game = GameService.get_by_id(invoker=claims.get("email"), game_id= game_id, db=db)
+    return game
