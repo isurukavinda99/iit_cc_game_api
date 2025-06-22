@@ -1,6 +1,6 @@
 from starlette import status
 
-from app.dto.game_schema import GameCreate
+from app.dto.game_schema import GameCreate, GameUpdate
 from app.config.config import get_db
 from app.exceptions.exceptions import AppExceptionCase
 from fastapi import Depends
@@ -42,3 +42,7 @@ class GameService:
     def get_by_id(invoker: str, game_id: int, db: Session = Depends(get_db())):
         game = GameRepository.get_by_id(game_id = game_id, db= db)
         return game
+
+    @staticmethod
+    def update_game(invoker: str, game_id: int, update_data: GameUpdate,  db: Session = Depends(get_db())):
+        pass
