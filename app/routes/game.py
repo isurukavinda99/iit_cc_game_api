@@ -16,3 +16,8 @@ router = APIRouter(prefix="/game", tags=["games"])
 async def create_item(item: GameCreate, db: Session = Depends(get_db), claims: dict = Depends(require_auth)):
     game = GameService.create_game(game=item, invoker=claims.get("email"), db=db)
     return game
+
+@router.get("")
+async def get_all_games(db: Session = Depends(get_db), claims: dict = Depends(require_auth)):
+    games = GameService.get_games(invoker=claims.get("email"), db=db)
+    return games

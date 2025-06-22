@@ -32,3 +32,8 @@ class GameService:
                 status.HTTP_500_INTERNAL_SERVER_ERROR,
                 code="DB_ERROR"
             ) from e
+
+    @staticmethod
+    def get_games(invoker: str, db: Session = Depends(get_db())):
+        games = GameRepository.get_all(db)
+        return games
