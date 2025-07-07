@@ -13,6 +13,7 @@ router = APIRouter(prefix="/game", tags=["games"])
 
 @router.post("", response_model=GameResponse)
 async def create_item(item: GameCreate, db: Session = Depends(get_db), claims: dict = Depends(require_auth)):
+    print("Claims decoded:", claims)
     game = GameService.create_game(game=item, invoker=claims.get("email"), db=db)
     return game
 
