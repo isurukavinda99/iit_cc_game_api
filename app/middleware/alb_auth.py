@@ -89,7 +89,7 @@ class ALBCognitoAuth(HTTPBearer):
                 algorithms=key.get("alg", "RS256"),
                 issuer=self.issuer,
                 audience=os.getenv("COGNITO_CLIENT_ID"), #COGNITO_USER_POOL_ID
-                options={"verify_aud": True},
+                options={"verify_aud": True, "verify_at_hash": False},
             )
             request.state.claims = claims
             return claims
