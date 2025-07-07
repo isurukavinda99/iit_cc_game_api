@@ -26,7 +26,7 @@ async def get_by_id(game_id: int, db: Session = Depends(get_db), claims: dict = 
     game = GameService.get_by_id(invoker=claims.get("email"), game_id= game_id, db=db)
     return game
 
-@router.get("/{game_id}")
+@router.put("/{game_id}")
 async def update_game(game_id: int, update_data: GameUpdate, db: Session = Depends(get_db), claims: dict = Depends(require_auth)):
     updated_game = GameService.update_game(invoker=claims.get("email"), game_id=game_id, update_data=update_data, db=db)
     return updated_game

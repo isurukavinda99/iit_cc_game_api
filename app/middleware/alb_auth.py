@@ -55,7 +55,7 @@ class ALBCognitoAuth(HTTPBearer):
         if "x-amzn-oidc-data" in request.headers:
             return self._process_alb_token(request)
 
-        # Otherwise, validate Bearer token directly (for dev/test)
+        # Otherwise, validate Bearer token directly (for dev/tests)
         return await self._process_bearer_token(request)
 
     def _process_alb_token(self, request: Request) -> Dict:

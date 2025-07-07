@@ -17,6 +17,10 @@ security = ALBCognitoAuth()
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 logger = logging.getLogger(__name__)
 
+# this import are create database entities before start the application
+from app.entity.game_entity import Game
+from app.entity.mst_g_category import GameCategory
+
 @app.on_event("startup")
 async def startup_event():
     logger.info("🚀 App startup initiated.")
