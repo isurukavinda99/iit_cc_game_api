@@ -23,3 +23,9 @@ class GameResponse(BaseModel):
 
     class Config:
         orm_mode = True
+
+class GameUpdate(BaseModel):
+    name: Optional[str] = Field(None, max_length=255, example="Updated Game Name")
+    category_id: Optional[int] = Field(None, description="New Game Category ID")
+    active: Optional[bool] = None
+    updated_by: Optional[str] = None

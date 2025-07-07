@@ -1,4 +1,4 @@
-from sqlalchemy.orm import Session
+from sqlalchemy.orm import Session, joinedload
 from app.entity.game_entity import Game as GameModal
 
 class GameRepository:
@@ -13,3 +13,11 @@ class GameRepository:
         except Exception as e:
             db.rollback()
             raise e
+
+    @staticmethod
+    def get_all(db: Session):
+        return db.query(GameModal).options(joinedload(GameModal.category)).all()
+
+    @staticmethod
+    def get_by_id(game_id: int, db: Session):
+        return db.query(GameModal).options(joinedload(GameModal.category)).filter(GameModal.id == game_id).first()
