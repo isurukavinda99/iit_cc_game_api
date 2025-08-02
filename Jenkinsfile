@@ -97,7 +97,7 @@ pipeline {
 
     post {
         success {
-            echo '✅ Order API deployed successfully!'
+            echo '✅ Game API deployed successfully!'
         }
         failure {
             echo '❌ Deployment failed. Please check logs.'
