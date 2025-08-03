@@ -40,7 +40,7 @@ pipeline {
                         echo '=== Running Tests in Docker Container ==='
                         sh """
                             docker run --rm \\
-                                -p 8091:8081 \\
+                                -p 8091:8082 \\
                                 -e DB_HOST=${DB_HOST} \\
                                 -e DB_NAME=${DB_NAME} \\
                                 -e DB_USER=${DB_USER} \\
