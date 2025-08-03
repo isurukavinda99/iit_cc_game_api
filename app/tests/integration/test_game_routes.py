@@ -3,7 +3,7 @@ import os
 import requests
 import uuid
 
-BASE_URL = "http://localhost:8002/game/"
+BASE_URL = "http://localhost:8081/game/"
 HEADERS = {
     "x-amzn-oidc-data": os.environ["OIDC_TOKEN"]
 }

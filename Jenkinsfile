@@ -40,7 +40,7 @@ pipeline {
                         echo '=== Running Tests in Docker Container ==='
                         sh """
                             docker run --rm \\
-                                -p 8091:8082 \\
+                                -p 8091:8081 \\
                                 -e DB_HOST=${DB_HOST} \\
                                 -e DB_NAME=${DB_NAME} \\
                                 -e DB_USER=${DB_USER} \\
@@ -51,7 +51,7 @@ pipeline {
                                 -e AWS_REGION=${AWS_REGION} \\
                                 -e OIDC_TOKEN=${OIDC_TOKEN} \\
                                 ${DOCKER_HUB_REPO}:latest \\
-                                /bin/sh -c "uvicorn app.main:app --host 0.0.0.0 --port 8082 & sleep 15 && pytest app/tests/integration"
+                                /bin/sh -c "uvicorn app.main:app --host 0.0.0.0 --port 8081 & sleep 15 && pytest app/tests/integration"
 
                         """
                     }
