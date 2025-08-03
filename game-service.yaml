@@ -1,0 +1,14 @@
+#game-service.yaml
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: game-api-service
+spec:
+  selector:
+    app: game-api
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8082
+  type: LoadBalancer
