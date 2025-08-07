@@ -45,4 +45,37 @@ class GameService:
 
     @staticmethod
     def update_game(invoker: str, game_id: int, update_data: GameUpdate,  db: Session = Depends(get_db())):
-        pass
+        # Check if the game exists
+        game = GameRepository.get_by_id(game_id=game_id, db=db)
+        if not game:
+            raise AppExceptionCase(
+                "Game not found",
+                status.HTTP_404_NOT_FOUND,
+                code="NOT_FOUND"
+            )
+
+        # If category_id is being updated, validate the new category
+        if update_data.category_id is not None:
+            category = GameCategoryRepository.get_by_id(db, update_data.category_id)
+            if not category:
+                raise AppExceptionCase(
+                    "Category not found",
+                    status.HTTP_404_NOT_FOUND,
+                    code="NOT_FOUND"
+                )
+
+        try:
+            # Pass to repository method
+            updated_game = GameRepository.update_game(
+                invoker=invoker,
+                game_id=game_id,
+                update_data=update_data,
+                db=db
+            )
+            return updated_game
+        except Exception as e:
+            raise AppExceptionCase(
+                "Game update failed due to DB error: " + str(e),
+                status.HTTP_500_INTERNAL_SERVER_ERROR,
+                code="DB_ERROR"
+            ) from e
