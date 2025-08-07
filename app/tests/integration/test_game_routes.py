@@ -39,9 +39,9 @@ def test_game_crud_flow():
     # 4. Update game
     update_payload = {
         "name": f"{unique_name} Updated",
-        "category_id": 2,
+        "category_id": 1,
         "active": False,
         "updated_by": "test-integration"
     }
     update_res = requests.put(f"{BASE_URL}{game_id}", json=update_payload, headers=HEADERS)
-    # assert update_res.status_code == 200
+    assert update_res.status_code == 200
